@@ -20,6 +20,18 @@ The main building blocks of Dagster are the `Pipeline` and `Solid`. Note: Dagste
 | Solids | Op | function to "read inputs, perform an action, and emit outputs" |
 | Composite Solids | -> Graphs | "unit of abstraction for composing a solid from other solids" |
 
+
+#### Solids
+- "Individual units of computations wired together to form a pipeline"
+- All solids in a pipeline execute in same pipeline by default, but can be configured to run in separate processes (typical in production)
+- Use decorator `@solid` for a function
+
+#### Pipelines
+- Set of solids arranged in a DAG
+- Use decorator `@pipeline` for a function that calls solids
+- When calling a solid inside a pipeline function, the function is not actually called - instead, the graph is built up
+
+
 ### Scheduler
 Includes a scheduler, `dagster_daemon`, for managing different methods of launching pipeline runs:
 - scheduled: fixed interval scheduling (beyond basic cron limitations, like considering holidays)
